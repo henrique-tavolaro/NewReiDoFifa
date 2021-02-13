@@ -1,12 +1,10 @@
-package com.henriquetavolaro.newreidofifa.ui
+package com.henriquetavolaro.newreidofifa.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import com.henriquetavolaro.newreidofifa.R
-import com.henriquetavolaro.newreidofifa.SignInActivity
 import com.henriquetavolaro.newreidofifa.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

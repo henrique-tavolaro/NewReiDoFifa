@@ -9,17 +9,23 @@
         android:id="@+id/nav_home"
         android:name="com.henriquetavolaro.newreidofifa.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_profileFragment"
+            app:destination="@id/nav_my_profile" />
+        <action
+            android:id="@+id/action_nav_home_to_slideshowFragment"
+            app:destination="@id/slideshowFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.henriquetavolaro.newreidofifa.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:id="@+id/nav_my_profile"
+        android:name="com.henriquetavolaro.newreidofifa.ui.profile.ProfileFragment"
+        android:label="My Profile"
         tools:layout="@layout/fragment_gallery" />
-
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/slideshowFragment"
         android:name="com.henriquetavolaro.newreidofifa.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="fragment_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
 </navigation>

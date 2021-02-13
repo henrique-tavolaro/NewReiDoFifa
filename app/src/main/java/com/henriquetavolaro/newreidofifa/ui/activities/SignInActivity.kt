@@ -1,4 +1,4 @@
-package com.henriquetavolaro.newreidofifa
+package com.henriquetavolaro.newreidofifa.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +7,10 @@ import android.text.TextUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
+import com.henriquetavolaro.newreidofifa.R
 import com.henriquetavolaro.newreidofifa.databinding.ActivitySignInBinding
-import com.henriquetavolaro.newreidofifa.ui.FirestoreClass
-import com.henriquetavolaro.newreidofifa.ui.User
+import com.henriquetavolaro.newreidofifa.ui.firebase.FirestoreClass
+import com.henriquetavolaro.newreidofifa.ui.models.User
 
 class SignInActivity : AppCompatActivity() {
 
@@ -42,7 +43,7 @@ class SignInActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        FirestoreClass().signInUser(this)
+                        FirestoreClass().loadUserData(this)
 
                     } else {
                         Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show()

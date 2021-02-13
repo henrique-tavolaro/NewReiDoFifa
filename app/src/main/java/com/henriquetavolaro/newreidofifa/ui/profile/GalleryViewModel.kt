@@ -1,4 +1,4 @@
-package com.henriquetavolaro.newreidofifa.ui.gallery
+package com.henriquetavolaro.newreidofifa.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,12 +1,12 @@
-package com.henriquetavolaro.newreidofifa
+package com.henriquetavolaro.newreidofifa.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
-import com.henriquetavolaro.newreidofifa.ui.FirestoreClass
-import com.henriquetavolaro.newreidofifa.ui.LoginActivity
+import com.henriquetavolaro.newreidofifa.R
+import com.henriquetavolaro.newreidofifa.ui.firebase.FirestoreClass
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

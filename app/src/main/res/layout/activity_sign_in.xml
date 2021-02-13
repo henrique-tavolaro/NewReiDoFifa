@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SignInActivity">
+        tools:context=".ui.activities.SignInActivity">
 
 
         <TextView
@@ -48,6 +48,7 @@
                     android:hint="@string/e_mail"
                     android:padding="@dimen/padding_email_register"
                     android:textSize="@dimen/register_email_size"
+                    android:inputType="textEmailAddress"
                     app:layout_constraintBottom_toTopOf="@+id/et_password_sign_in"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"

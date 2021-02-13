@@ -1,4 +1,4 @@
-package com.henriquetavolaro.newreidofifa.ui
+package com.henriquetavolaro.newreidofifa.ui.models
 
 import android.os.Parcel
 import android.os.Parcelable

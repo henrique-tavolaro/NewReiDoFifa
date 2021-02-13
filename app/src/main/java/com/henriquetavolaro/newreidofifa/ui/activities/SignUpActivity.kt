@@ -1,16 +1,16 @@
-package com.henriquetavolaro.newreidofifa.ui
+package com.henriquetavolaro.newreidofifa.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.henriquetavolaro.newreidofifa.R
 import com.henriquetavolaro.newreidofifa.databinding.ActivitySignUpBinding
+import com.henriquetavolaro.newreidofifa.ui.firebase.FirestoreClass
+import com.henriquetavolaro.newreidofifa.ui.models.User
 
 class SignUpActivity : AppCompatActivity() {
 

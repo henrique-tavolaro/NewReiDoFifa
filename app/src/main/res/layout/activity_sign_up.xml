@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.SignUpActivity">
+        tools:context=".ui.activities.SignUpActivity">
 
 
         <TextView
@@ -48,6 +48,7 @@
                     android:layout_marginTop="@dimen/margin_bottom_sign_up_btn"
                     android:layout_marginBottom="@dimen/margin_bottom_sign_up"
                     android:hint="@string/e_mail"
+                    android:inputType="textEmailAddress"
                     android:padding="@dimen/padding_email_register"
                     android:textSize="@dimen/register_email_size"
                     app:layout_constraintBottom_toTopOf="@+id/et_name_sign_up"

@@ -23,4 +23,8 @@
     <string name="name">Name</string>
     <string name="image_contentDescription">image</string>
     <string name="sign_in">SIGN IN</string>
+    <string name="my_profile">My Profile</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="home">Home</string>
+    <string name="update">UPDATE</string>
 </resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.LoginActivity">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="@dimen/margin_top_image_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/bilolaldo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up_or_login"
+            android:textSize="@dimen/text_login_screen"
+            app:layout_constraintBottom_toTopOf="@+id/button_sign_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_button_rounded"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/sign_up"
+            android:textSize="@dimen/sign_up_btn_size"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/button_login"
+            tools:layout_editor_absoluteX="45dp"
+            android:layout_marginBottom="@dimen/margin_bottom_sign_up_btn"
+            android:layout_marginHorizontal="@dimen/margin_horizontal_btn" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_white_button_rounded"
+            android:text="@string/login"
+            android:textSize="@dimen/sign_up_btn_size"
+            android:textColor="@color/primaryColor"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="56dp"
+            android:layout_marginBottom="@dimen/margin_bottom_login_btn"
+            android:layout_marginHorizontal="@dimen/margin_horizontal_btn" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

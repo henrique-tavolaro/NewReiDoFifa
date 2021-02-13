@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "2110796920",
+    "project_id": "reidofifa-d9bd6",
+    "storage_bucket": "reidofifa-d9bd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2110796920:android:acf7de3927bbd05373298d",
+        "android_client_info": {
+          "package_name": "com.henriquetavolaro.newreidofifa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2110796920-8kuv3peskfapmtvrhdkpulipkoh373hh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpVExC9EwWRwMhWwZp2L9Zt9KLBwmJ6ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2110796920-8kuv3peskfapmtvrhdkpulipkoh373hh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2110796920:android:357ced388f6fc96673298d",
+        "android_client_info": {
+          "package_name": "com.henriquetavolaro.reidofifa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2110796920-8kuv3peskfapmtvrhdkpulipkoh373hh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpVExC9EwWRwMhWwZp2L9Zt9KLBwmJ6ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2110796920-8kuv3peskfapmtvrhdkpulipkoh373hh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

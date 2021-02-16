@@ -3,7 +3,10 @@ package com.henriquetavolaro.newreidofifa.ui.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.WindowManager
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -16,11 +19,16 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.henriquetavolaro.newreidofifa.R
+import com.henriquetavolaro.newreidofifa.ui.Constants
+import com.henriquetavolaro.newreidofifa.ui.NavigationUpdaterListener
 import com.henriquetavolaro.newreidofifa.ui.firebase.FirestoreClass
 import com.henriquetavolaro.newreidofifa.ui.models.User
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -31,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         FirestoreClass().loadUserData(this)
+
+        val user : FirebaseUser = FirebaseAuth.getInstance().currentUser!!
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -45,6 +55,17 @@ class MainActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
+//        navController.addOnDestinationChangedListener{_, destination, _ ->
+//            if(destination.id == R.id.nav_home) {
+//                Toast.makeText(this, "zeca", Toast.LENGTH_SHORT).show()
+////                FirestoreClass().loadUserData(this@MainActivity)
+//
+////                FirestoreClass().loadUserData(this)
+//            } else {
+//                Toast.makeText(this, "zi", Toast.LENGTH_SHORT).show()
+//            }
+//
+//        }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -54,9 +75,8 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -69,18 +89,34 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun updateNavigationUserDetails(user: User){
+    fun updateNavigationUserDetails(user: User) {
+
+        val ivDrawerImage: ImageView = findViewById(R.id.iv_drawer!!)
+
         Glide
             .with(this)
             .load(user.image)
             .centerCrop()
             .placeholder(R.drawable.ic_user_place_holder)
-            .into(findViewById(R.id.iv_drawer))
+            .into(ivDrawerImage)
 
-        val userName : TextView = findViewById(R.id.tv_drawer)
+        val userName: TextView = findViewById(R.id.tv_drawer)
         userName.text = user.name
-        val userEmail : TextView = findViewById(R.id.tv_email_drawer)
+        val userEmail: TextView = findViewById(R.id.tv_email_drawer)
         userEmail.text = user.email
+
+    }
+
+
+//    override fun onUserDataChanged() {
+//
+//        FirestoreClass().loadUserData(this)
+//    }
+
+
+
+    fun getCurrentUserID(): String {
+        return FirebaseAuth.getInstance().currentUser!!.uid
     }
 
 }

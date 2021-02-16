@@ -19,5 +19,7 @@
     <dimen name="margin_top_register">100dp</dimen>
     <dimen name="margin_bottom_sign_up">16dp</dimen>
     <dimen name="margin_top_profile">64dp</dimen>
+    <dimen name="elevation">8dp</dimen>
+    <dimen name="adapter_margin">8dp</dimen>
 
 </resources>

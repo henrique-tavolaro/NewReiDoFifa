@@ -21,7 +21,11 @@
         android:id="@+id/nav_my_profile"
         android:name="com.henriquetavolaro.newreidofifa.ui.profile.ProfileFragment"
         android:label="My Profile"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_my_profile_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
     <fragment
         android:id="@+id/slideshowFragment"
         android:name="com.henriquetavolaro.newreidofifa.ui.slideshow.SlideshowFragment"

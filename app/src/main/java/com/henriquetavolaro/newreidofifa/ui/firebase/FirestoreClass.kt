@@ -3,13 +3,18 @@ package com.henriquetavolaro.newreidofifa.ui.firebase
 import android.app.Activity
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.ktx.Firebase
+import com.henriquetavolaro.newreidofifa.R
 import com.henriquetavolaro.newreidofifa.ui.Constants
 import com.henriquetavolaro.newreidofifa.ui.activities.MainActivity
 import com.henriquetavolaro.newreidofifa.ui.activities.SignInActivity
 import com.henriquetavolaro.newreidofifa.ui.activities.SignUpActivity
+import com.henriquetavolaro.newreidofifa.ui.home.HomeFragment
 import com.henriquetavolaro.newreidofifa.ui.models.User
 import com.henriquetavolaro.newreidofifa.ui.profile.ProfileFragment
 
@@ -26,6 +31,21 @@ class FirestoreClass {
             }
     }
 
+    fun updateUserProfileData(fragment: ProfileFragment, userHashMap: HashMap<String, Any>){
+        firestore.collection(Constants.USERS)
+            .document(getCurrentUserID())
+            .update(userHashMap)
+            .addOnSuccessListener {
+                fragment.profileUpdateSuccess()
+                Log.i("TAG", "profile data updated successfully")
+            }
+            .addOnFailureListener {e->
+                Log.e("TAG", "profile data error", e)
+
+            }
+    }
+
+
     fun loadUserDataOnProfile(fragment: Fragment) {
         firestore.collection(Constants.USERS)
             .document(getCurrentUserID())
@@ -36,7 +56,7 @@ class FirestoreClass {
                 when(fragment) {
                     is ProfileFragment -> {
                         fragment.setUserDataInUI(loggedUser!!)
-                    }
+                     }
                 }
             }
             .addOnFailureListener { e ->
@@ -58,6 +78,7 @@ class FirestoreClass {
                     }
                     is MainActivity -> {
                         activity.updateNavigationUserDetails(loggedUser!!)
+//                        getUserDetails()
                     }
                 }
             }
@@ -69,12 +90,30 @@ class FirestoreClass {
 
     fun getCurrentUserID(): String {
 
-        var currentUser = FirebaseAuth.getInstance().currentUser
+        val currentUser = FirebaseAuth.getInstance().currentUser
         var currentUserID = ""
         if (currentUser != null) {
             currentUserID = currentUser.uid
         }
         return currentUserID
     }
+
+//    fun getUserDetails(){
+//        val user = Firebase.auth.currentUser
+//        user?.let {
+//            // Name, email address, and profile photo Url
+//            val name = user.displayName
+//            val email = user.email
+//            val photoUrl = user.photoUrl
+//
+//            // Check if user's email is verified
+//            val emailVerified = user.isEmailVerified
+//
+//            // The user's ID, unique to the Firebase project. Do NOT use this value to
+//            // authenticate with your backend server, if you have one. Use
+//            // FirebaseUser.getToken() instead.
+//            val uid = user.uid
+//        }
+//    }
 
 }

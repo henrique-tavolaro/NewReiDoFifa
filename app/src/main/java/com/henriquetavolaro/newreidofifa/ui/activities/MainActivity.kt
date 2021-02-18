@@ -1,7 +1,9 @@
 package com.henriquetavolaro.newreidofifa.ui.activities
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -18,8 +20,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.henriquetavolaro.newreidofifa.R
@@ -32,6 +37,8 @@ class MainActivity : AppCompatActivity(){
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+//    private lateinit var dialogBox: Dialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,18 +47,28 @@ class MainActivity : AppCompatActivity(){
 
         FirestoreClass().loadUserData(this)
 
-        val user : FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+//        val query = FirestoreClass().getAllUsers()
+//
+//        val options: FirestoreRecyclerOptions<User> = FirestoreRecyclerOptions.Builder<User>()
+//            .setQuery(query, User::class.java)
+//            .setLifecycleOwner(this)
+//            .build()
+//
+//        val fab: FloatingActionButton = findViewById(R.id.fab)
+//        fab.setOnClickListener(View.OnClickListener {
+//            val adapter = OponentAdapter(options)
+//            val oponentAdapter = it.findViewById<RecyclerView>(R.id.rv_players_list)
+//            oponentAdapter.adapter = adapter
+//            this.dialogBox = Dialog(this)
+//            this.dialogBox.setContentView(R.layout.dialog_oponent)
+//            oponentAdapter.layoutManager = LinearLayoutManager(this)
+//            dialogBox.show()
+//        })
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -108,15 +125,8 @@ class MainActivity : AppCompatActivity(){
     }
 
 
-//    override fun onUserDataChanged() {
-//
-//        FirestoreClass().loadUserData(this)
-//    }
-
-
-
     fun getCurrentUserID(): String {
-        return FirebaseAuth.getInstance().currentUser!!.uid
+        return FirebaseAuth.getInstance().currentUser.toString()!!
     }
 
 }

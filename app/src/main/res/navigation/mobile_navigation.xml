@@ -30,6 +30,16 @@
         android:id="@+id/slideshowFragment"
         android:name="com.henriquetavolaro.newreidofifa.ui.slideshow.SlideshowFragment"
         android:label="fragment_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_slideshow" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

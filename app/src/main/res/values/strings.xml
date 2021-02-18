@@ -27,4 +27,6 @@
     <string name="sign_out">Sign Out</string>
     <string name="home">Home</string>
     <string name="update">UPDATE</string>
+    <string name="save_game">SAVE GAME</string>
+    <string name="floating_action_button">floating action button</string>
 </resources>

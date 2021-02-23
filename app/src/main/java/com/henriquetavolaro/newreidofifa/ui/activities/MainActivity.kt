@@ -1,35 +1,21 @@
 package com.henriquetavolaro.newreidofifa.ui.activities
 
-import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
+import android.view.MenuItem
 import android.view.WindowManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
+import androidx.navigation.ui.*
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.henriquetavolaro.newreidofifa.R
-import com.henriquetavolaro.newreidofifa.ui.Constants
-import com.henriquetavolaro.newreidofifa.ui.NavigationUpdaterListener
 import com.henriquetavolaro.newreidofifa.ui.firebase.FirestoreClass
 import com.henriquetavolaro.newreidofifa.ui.models.User
 
@@ -37,7 +23,6 @@ class MainActivity : AppCompatActivity(){
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-//    private lateinit var dialogBox: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,42 +32,25 @@ class MainActivity : AppCompatActivity(){
 
         FirestoreClass().loadUserData(this)
 
+        val userId = getCurrentUserID()
+
+
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-//        val query = FirestoreClass().getAllUsers()
-//
-//        val options: FirestoreRecyclerOptions<User> = FirestoreRecyclerOptions.Builder<User>()
-//            .setQuery(query, User::class.java)
-//            .setLifecycleOwner(this)
-//            .build()
-//
-//        val fab: FloatingActionButton = findViewById(R.id.fab)
-//        fab.setOnClickListener(View.OnClickListener {
-//            val adapter = OponentAdapter(options)
-//            val oponentAdapter = it.findViewById<RecyclerView>(R.id.rv_players_list)
-//            oponentAdapter.adapter = adapter
-//            this.dialogBox = Dialog(this)
-//            this.dialogBox.setContentView(R.layout.dialog_oponent)
-//            oponentAdapter.layoutManager = LinearLayoutManager(this)
-//            dialogBox.show()
-//        })
+
+        val fab: FloatingActionButton = findViewById(R.id.fab)
+        fab.setOnClickListener {
+            FirestoreClass().signOut(this)
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
-//        navController.addOnDestinationChangedListener{_, destination, _ ->
-//            if(destination.id == R.id.nav_home) {
-//                Toast.makeText(this, "zeca", Toast.LENGTH_SHORT).show()
-////                FirestoreClass().loadUserData(this@MainActivity)
-//
-////                FirestoreClass().loadUserData(this)
-//            } else {
-//                Toast.makeText(this, "zi", Toast.LENGTH_SHORT).show()
-//            }
-//
-//        }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -92,7 +60,24 @@ class MainActivity : AppCompatActivity(){
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+//        navView.setNavigationItemSelectedListener(
 
+//        navView.menu.findItem(R.id.nav_sign_out).setOnMenuItemClickListener { menuItem ->
+//            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+//
+//            menuItem.
+////            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+////            Toast.makeText(this, "logged out", Toast.LENGTH_LONG).show()
+//        }
+
+
+
+        val signOutBtn : FloatingActionButton = findViewById(R.id.fab)
+        signOutBtn.setOnClickListener {
+            FirestoreClass().signOut(this)
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -100,6 +85,8 @@ class MainActivity : AppCompatActivity(){
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
@@ -126,7 +113,9 @@ class MainActivity : AppCompatActivity(){
 
 
     fun getCurrentUserID(): String {
-        return FirebaseAuth.getInstance().currentUser.toString()!!
+        return FirebaseAuth.getInstance().currentUser.toString()
     }
+
+
 
 }

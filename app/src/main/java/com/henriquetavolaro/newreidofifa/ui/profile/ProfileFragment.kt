@@ -62,8 +62,6 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         FirestoreClass().loadUserDataOnProfile(this)
-//        (requireActivity() as NavigationUpdaterListener).onUserDataChanged()
-
         val profileImage: ImageView = view.findViewById(iv_profile_image)
         profileImage.setOnClickListener {
             if (context?.let { it1 -> ContextCompat.checkSelfPermission(it1, Manifest.permission.READ_EXTERNAL_STORAGE) }
@@ -195,9 +193,6 @@ class ProfileFragment : Fragment() {
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(context!!.contentResolver.getType(uri!!))
     }
 
-    fun profileUpdateSuccess(){
-        findNavController().navigate(R.id.action_nav_my_profile_to_nav_home)
-    }
 
     companion object {
 

@@ -1,22 +1,22 @@
 package com.henriquetavolaro.newreidofifa.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.henriquetavolaro.newreidofifa.R
 import com.henriquetavolaro.newreidofifa.databinding.FragmentHomeBinding
-import com.henriquetavolaro.newreidofifa.ui.activities.OponentAdapter
+import com.henriquetavolaro.newreidofifa.ui.NavigationUpdaterListener
+import com.henriquetavolaro.newreidofifa.ui.activities.LoginActivity
+import com.henriquetavolaro.newreidofifa.ui.activities.adapters.OponentAdapter
 import com.henriquetavolaro.newreidofifa.ui.firebase.FirestoreClass
 import com.henriquetavolaro.newreidofifa.ui.models.User
 
@@ -62,11 +62,12 @@ class HomeFragment : Fragment(), OponentAdapter.OnItemClickListener{
 
         binding.rvPlayersList.adapter = adapter
 
-        val fab: FloatingActionButton = view.findViewById(R.id.fab)
-        fab.setOnClickListener {
-
-            Toast.makeText(context, currentUserID, Toast.LENGTH_SHORT).show()
-        }
+//        val fab: FloatingActionButton = view.findViewById(R.id.fab)
+//        fab.setOnClickListener {
+//            FirestoreClass().signOut(this)
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
     fun getCurrentUserID(): String {
@@ -77,7 +78,4 @@ class HomeFragment : Fragment(), OponentAdapter.OnItemClickListener{
         val action = HomeFragmentDirections.actionNavHomeToSlideshowFragment(user.id, user.name, user.image)
         findNavController().navigate(action)
     }
-
-
-
 }

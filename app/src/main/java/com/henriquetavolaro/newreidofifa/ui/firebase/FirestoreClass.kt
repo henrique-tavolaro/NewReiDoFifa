@@ -2,23 +2,17 @@ package com.henriquetavolaro.newreidofifa.ui.firebase
 
 import android.app.Activity
 import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.ktx.Firebase
-import com.henriquetavolaro.newreidofifa.R
 import com.henriquetavolaro.newreidofifa.ui.Constants
 import com.henriquetavolaro.newreidofifa.ui.activities.MainActivity
 import com.henriquetavolaro.newreidofifa.ui.activities.SignInActivity
 import com.henriquetavolaro.newreidofifa.ui.activities.SignUpActivity
-import com.henriquetavolaro.newreidofifa.ui.home.HomeFragment
+import com.henriquetavolaro.newreidofifa.ui.models.Games
 import com.henriquetavolaro.newreidofifa.ui.models.User
 import com.henriquetavolaro.newreidofifa.ui.profile.ProfileFragment
 import com.henriquetavolaro.newreidofifa.ui.slideshow.SlideshowFragment
@@ -36,25 +30,74 @@ class FirestoreClass {
             }
     }
 
-    fun updateUserProfileData(fragment: ProfileFragment, userHashMap: HashMap<String, Any>){
+
+    fun registerGames(fragment: SlideshowFragment, gameHashMap: HashMap<String, String>) {
+        firestore.collection(Constants.GAMES)
+            .add(gameHashMap)
+            .addOnSuccessListener {
+//                fragment.saveGame(gameHashMap)
+                val id = it.id
+                it.update("id", id)
+            }
+    }
+
+    fun signOut(activity: MainActivity) {
+        FirebaseAuth.getInstance().signOut()
+    }
+
+    fun getGameID(games: Games): String {
+        return firestore.collection(Constants.GAMES)
+            .document().id
+    }
+
+    fun updateUserProfileData(fragment: ProfileFragment, userHashMap: HashMap<String, Any>) {
         firestore.collection(Constants.USERS)
             .document(getCurrentUserID())
             .update(userHashMap)
             .addOnSuccessListener {
-                fragment.profileUpdateSuccess()
                 Log.i("TAG", "profile data updated successfully")
 
             }
-            .addOnFailureListener {e->
+            .addOnFailureListener { e ->
                 Log.e("TAG", "profile data error", e)
 
             }
     }
 
-    fun getAllUsers() : CollectionReference {
+//    fun getGameId(games: Games): String {
+//        return firestore
+//            .collection(Constants.GAMES).add(games)
+//            .document().id
+//    }
+
+    fun getAllGames(user1: String, user2: String): Query? {
+        try {
+            return firestore
+                .collection(Constants.GAMES)
+                .whereIn(Constants.PLAYERS, listOf(user1 + "_" + user2, user2 + "_" + user1))
+        } catch (e: Exception) {
+            Log.e("ErrorTag", e.message.toString(), e)
+        }
+        return null
+    }
+
+//    fun getAllGamesP2(query: Query, user1: String, user2: String) : Query? {
+//        try {
+//            return
+//            val query1 =
+//
+//            query
+//                .whereIn(Constants.PLAYER2ID, arrayListOf(user2, user1))
+//        } catch (e: Exception) {
+//            Log.e("TAGS2", e.stackTrace.toString(), e)
+//        }
+//        return null
+//    }
+
+
+    fun getAllUsers(): CollectionReference {
         return firestore
             .collection(Constants.USERS)
-
     }
 
     fun loadUserDataOnProfile(fragment: Fragment) {
@@ -64,10 +107,10 @@ class FirestoreClass {
             .addOnSuccessListener { document ->
                 val loggedUser = document.toObject(User::class.java)
 
-                when(fragment) {
+                when (fragment) {
                     is ProfileFragment -> {
                         fragment.setUserDataInUI(loggedUser!!)
-                     }
+                    }
                     is SlideshowFragment -> {
                         fragment.setUserPlayer1(loggedUser!!)
                     }
